@@ -6,7 +6,7 @@ class Student {
         this.fullName = firstName + " " + middleInitial + " " + lastName;
     }
 }
-// 带?表示属性是可选属性，实现接口时，必须包含除了可选属性以外的属性
+// 带?表示属性是可选属性，实现接口时，必须包含除了可选属性以外的属性，同时不能包含没有在接口中定义的属性。 赋值的时候，变量的形状必须和接口的形状保持一致。
 // readonly 表示只读属性
 interface Person extends SuperPerson{
     readonly firstName: string;
@@ -17,6 +17,18 @@ interface Person extends SuperPerson{
 interface SuperPerson {
     lastName: number | string;
 }
+
+interface Person {
+    name: string;
+    age?: number;
+    [propName: string]: string | number | boolean;
+}
+
+let tom: Person = {
+    name: 'Tom',
+    age: 25,
+    gender: 'male'
+};
 
 function greeter(a: Person){
 	// 只读属性这样修改，也会报错
@@ -59,6 +71,7 @@ class TextBox extends Control {
 let myFavoriteNumber: string = 'seven';
 // myFavoriteNumber = 7; 这句会报错，myFavoriteNumber被视为了string类型
 // 1.在声明变量或成员、参数默认值、确定函数返回值时，如果没有明确地指定类型，则会进行类型推导
+
 // 第一种推导就是最简单的，根据声明的值，推导出最普通的类型
 let x = [0, 1, null]; // 这种情况，会把x认定为由number、null两种类型组成的数组
 
@@ -71,4 +84,15 @@ window.onmousedown = function(mouseEvent: Event) {
     console.log(mouseEvent.bubbles);
     // console.log(mouseEvent.a); //<- Error
 };
+
+
+// - - - - - - - - - - - - - -
+// 联合类型
+// 可以使用|分隔每个类型，表示联合类型
+let something: string | number // 表示string、number其中之一
+
+// something.length <- error
+// 对于联合类型，只能访问此联合类型的所有类型里共有的属性或方法，number没有length属性，所以报错
+
+
 
