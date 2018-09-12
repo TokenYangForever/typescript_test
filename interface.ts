@@ -16,16 +16,17 @@ interface Person extends SuperPerson{
 // 接口属性也可如下设置多种混合类型
 interface SuperPerson {
     lastName: number | string;
-}
-
-interface Person {
-    name: string;
     age?: number;
     [propName: string]: string | number | boolean;
 }
 
+// interface Person {
+//     name: string;
+// }
+
 let tom: Person = {
-    name: 'Tom',
+    firstName: 'Jack',
+    lastName: 'Tom',
     age: 25,
     gender: 'male'
 };
